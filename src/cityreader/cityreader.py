@@ -83,4 +83,29 @@ def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # TODO Ensure that the lat and lon valuse are all floats
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
+  norm = {}
+  if lat1 >= lat2:
+    norm['lat1'] = lat1
+    norm['lon1'] = lon1
+    norm['lat2'] = lat2
+    norm['lon2'] = lon2
+  else:
+    norm['lat1'] = lat2
+    norm['lon1'] = lon2
+    norm['lat2'] = lat1
+    norm['lon2'] = lon1
+
+  within = [city for city in cities if norm['lat2'] <= city.lat <= norm['lat1'] and norm['lon2'] <= city.lon <= norm['lon1']]
+
+  for item in within:
+    print(f'{item.name}: ({item.lat}, {item.lon})')
+
   return within
+
+
+# lat1, lon1 = [float(lat1) for lat1 in input("Enter set of lat1 and lon1: ").split(',')]
+# lat2, lon2 = [float(lat2) for lat2 in input("Enter set of lat2 and lon2: ").split(',')]
+
+# cityreader_stretch(lat1, lon1, lat2, lon2, cities)
+
+  
